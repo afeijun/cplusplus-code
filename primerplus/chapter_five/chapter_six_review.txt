@@ -1,0 +1,105 @@
+1.请看下面两个计算空格和换行符数目的代码片段：
+version1:
+while (cin.get(ch))
+{
+	if (ch == ' ')
+		spaces++;
+	if (ch == '\n')
+		newlines++;
+}
+version2:
+while (cin.get(ch))
+{
+	if (ch == ' ')
+		spaces++;
+	else if (ch == '\n')
+		newlines++;
+}
+第二种格式比第一种格式好在哪里呢？
+版本1中两个if语句的判断语句都会被执行;版本2只需要执行1次判断语句。
+2.在程序2.cpp中，用ch+1替换++ch将发生什么情况呢？
+将输出ch+1对应的ASCII码。
+3.请认真考虑下面的程序：
+#include <iostream>
+using namespace std;
+int main()
+{
+	char ch;
+	int ct1, ct2;
+	ct1 = ct2 = 0;
+	while((ch = cin.get()) != '$')
+	{
+		cout << ch;
+		ct1++;
+		if (ch = '$')
+			ct2++
+		cout << ch;
+	}
+	cout << "ct1 = " << ct1 << ", ct2 = " << ct2 << "\n";
+	return 0;
+}
+假设输入如下（请在每行末尾按回车键）：
+Hi！
+Send $10 or $20 now!
+则输出将是什么（还记得吗，输入被缓冲）？
+H$i$!$
+$S$e$n$d$ $ct1 = 9, ct2 = 9
+4.创建表示下述条件的逻辑表达式：
+a.weight大于或等于115,但小于125。
+weight >= 115 && weight < 125
+b.ch为q或Q。
+ch == 'q' || ch == 'Q'
+c.x为偶数，但不是26。
+x%2 == 0 && x != 26
+d.x为偶数，但不是26的倍数。
+x%2 == 0 && x%26 != 0
+e.donation为1000-2000或guest为1。
+(donation >= 1000 && donation <= 2000) || guest ==1
+f.ch是小写字母或大写字母(假设小写字母是依次编码的，大写字母也是依次编码的，但在大小写字母间编码不是连续的)。
+(ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')
+5.在英语中，“I will not not speak（我不会不说）”的意思与“I will speak（我要说）”相同。在c++中，!!x是否与x相同呢？
+如果x是bool类型，则!!x与x相同
+如果x是整型或字符型，则!!x与x不同
+6.创建一个条件表达式，其值为变量的绝对值。也就是说，如果变量x为正，则表达式的值为x;但如果x为负，则表达式的值为-x————这是一个正值。
+(x >= 0) ? x : -x;
+7.用switch改写下面的代码片段：
+if (ch == 'A')
+	a_grade++;
+else if (ch == 'B')
+	b_grade++;
+else if (ch == 'C')
+	c_grade++;
+else if (ch == 'D')
+	d_grade++;
+else
+	f_grade++;
+改写：
+switch(ch)
+{
+	case 'A' : a_grade; break;
+	case 'B' : b_grade; break;
+	case 'C' : c_grade; break;
+	case 'D' : d_grade; break;
+	default  : f_grade; 
+}
+8.对于程序10.cpp，与使用数字相比，使用字符（如a和c）表示菜单选项和case标签有何优点呢？（提示：想想用户输入q和输入5的情况。）
+使用数字时，若输入字符（如a或q）程序将不断循环，出错。
+而使用字符，无论输入字符还是数字都不会出错。
+9.请看下面的代码片段：
+int line = 0;
+char ch;
+while (cin.get(ch))
+{
+	if (ch == 'Q')
+		break;
+	if (ch != '\n')
+		continue;
+	line++;
+}
+请重写该代码片段，不要使用break和continue语句。
+while (cin.get(ch) && ch !='Q')
+{
+	if (ch == '\n')
+		line++;
+}
+
