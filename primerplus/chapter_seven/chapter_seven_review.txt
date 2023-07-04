@@ -1,0 +1,111 @@
+1.使用函数的三个步骤:
+函数定义
+函数原型
+函数调用
+2.请创建与下面的描述匹配的函数原型。
+a.igor()没有参数，也没有返回值。
+void igor(void);
+b.tofu()接受一个int参数，并返回一个float。
+float tofu(int);
+c.mpg()接受两个double参数，并返回一个double。
+double mpg(double, double);
+d.summation()将long数组名和数组长度作为参数，并返回一个long值。
+long summation(long [], int);
+e.doctor()接受一个字符串参数（不能修改该字符串），并返回一个double值。
+double doctor(const char []);
+f.ofcourse()将boss结构作为参数，不返回值。
+void ofcourse(boss);
+g.plot()将map结构的指针作为参数，并返回一个字符串。
+char * plot(map *);
+3.编写一个接受3个参数的函数：int数组名、数组长度和一个int值，并将数组的所有元素都设置为该int值。
+void set_array(int arr[], int size, int value)
+{
+	for (int i = 0; i < size; i++)
+	{
+		arr[i] = value;
+	}
+}
+4.编写一个接受3个参数的函数：指向数组区间中第一个元素的指针、指向数组区间最后一个元素后面的指针以及一个int值，
+并将数组中的每个元素都设置为该int值。
+void set_array(int *first, int *end, int value)
+{
+	int *temp = first;
+	for(temp; temp != end; temp++)
+	{
+		*temp = value;
+	}
+}
+5.编写将double数组名和数组长度作为参数，并返回该数组中最大值的函数。该函数不应修改数组的内容。
+double max_number(const double arr[], int size)
+{
+	double max = 0.0;
+	for (int i = 0; i < size; i++)
+	{
+		if(max < arr[i])
+			max = arr[i];
+	}
+	return max;
+}
+6.为什么不对类型为基本类型的函数参数使用const限定符?
+基本类型的话是以值传递的，形参只是实参的拷贝，不加const函数体也不能改变实参的值。
+7.c++程序可使用哪3种c-风格字符串格式？
+char str[] = "Hello world";
+"hello world";
+char *pt = "Hello world"
+8.编写一个函数，其原型如下：
+int replace(char * str, char c1, char c2);
+该函数将字符串中所有的c1都替换为c2,并返回替换次数。
+int replace(char * str, char c1, char c2)
+{
+	int count = 0;
+	while (*str != '\0')
+	{
+		if (*str == c1)
+		{
+			*str = c2;
+			count++;
+		}
+		str++;	
+	}
+	return count;
+}
+9.表达式*"pizza"的含义是什么？"taco"[2]呢？
+*"pizza"   --> p
+"taco"[2]  --> c
+10.c++允许按值传递结构，也允许传递结构的地址。如果glitz是一个结构变量，如何按值传递它？如何传递它的地址？这两种方法有何利弊？
+按值传递 --> glitz
+传递地址 --> &glitz
+按值传递可以保护原始数据，但效率比较低，如果结构体比较大的话，不建议使用;
+按地址传递可以直接修改原始数据，效率高（不需要拷贝），但会破坏原始数据。
+11.函数judge()的返回类型为int，他将这样一个函数的地址作为参数：将const char指针作为参数，并返回一个int值。请编写judge()函数的原型。
+int judge(int (*pf)(const char *) );
+12.假设有如下结构声明：
+struct applicant{
+	char name[30];
+	int credit_ratings[3];
+};
+a. 编写一个函数，它将application结构作为参数，并显示该结构的内容。
+void show(applicat app)
+{
+	cout << app.name << endl;
+	for (int i = 0; i < 3; i++)
+		cout << app.credit_ratings[i];
+}
+b.编写一个函数，它将application结构的地址作为参数，并显示该参数指向的结构的内容。
+void show(applicat *app)
+{
+	cout << app->name << endl;
+	for (int i = 0; i < 3; i++)
+		cout << app->credit_ratings[i];
+}
+13.假设函数f1()和f2()的原型如下：
+void f1(applicat *a);
+const char * f2(const applicat * a1, const applicat * a2);
+请将p1和p2分别声明为指向f1和f2的指针;将ap声明为一个数组，它包含5个类型与p1相同的指针;
+将pa声明为一个指针，它指向的数组包含10个类型与p2相同的指针。使用typedef来帮助完成这项工作。
+typedef void (*p_f1)(applicat *a);
+p_f1 p1 = f1;
+typedef const char *(*p_f2)(const applicat * a1, const applicat * a2);
+p_f2 p2 = f2;
+p_f1 ap[5];
+p_f2 (*pa)[10];
