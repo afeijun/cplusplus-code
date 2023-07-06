@@ -1,0 +1,80 @@
+1.那种函数是和定义为内联函数？
+函数的代码量小，且不能出现递归
+2.假设song()函数的原型如下：
+void song(const char * name, int times);
+a.如何修改原型，是times的默认值为1？
+void song(const char * name, int times = 1);
+b.函数定义需要做哪些修改？
+none
+c.能否为name提供默认值“O.My Papa”?
+不能，必须保证times也设置了默认值，才能设置name的默认值
+3.编写iquote()的重载版本————显示其用双引号括起的参数。编写3个版本：一个用于int参数，一个用于double参数，另一个用于string参数。
+void iquote(int n)
+{
+	cout << "\"" << n << "\"" << endl;
+}
+void iquote(double d)
+{
+	cout << "\"" << d << "\"" << endl;
+}
+void iquote(string s)
+{
+	cout << "\"" << s << "\"" << endl;
+}
+4.下面是一个结构参数:
+struct box
+{
+	char maker[40];
+	float height;
+	float width;
+	float length;
+	float volume;
+};
+a.编写一个函数，它将box结构的引用作为形参，并显示每个成员的值。
+void show(const box & b)
+{
+	cout << b.maker << b.height << b.width << b.length << b.volume;
+}
+b.编写一个函数，它将box结构的引用作为形参，并将volume成员设置为其他3边的乘积。
+void set_vol(box & b)
+{
+	b.volume = b.height * b.width * b.length;
+}
+5.为让函数fill()和show()使用引用参数，需要对程序清单7.15做哪些修改？
+void fill(array<double, Seasons> &pa);
+void show(const array<double, Seasons> &da);
+6.指出下面每个目标是否可以使用默认参数或函数重载完成，或者这两种方法都无法完成，并提供合适的原型。
+a.mass(density, volume)返回密度为density、体积为volume的物体的质量，而mass(denstity)返回密度为density、体积为1.0立方米的物体的质量。
+这些值的类型都为double。
+可以使用默认参数（函数重载也可以），double mass(double density, double volume = 1.0);
+b.repeat(10,"I'm OK")将指定的字符串显示10次，而repeat("But you're kind of stupid")将指定的字符串显示5次。
+可以使用函数重载，
+void repeat(int n, const char str[]);
+void repeat(const char str[]);
+c.average(3, 6)返回两个int参数的平均值(int类型)，而average(3.0, 6.0)返回两个double值的平均值(double类型)。
+可以使用函数重载，
+double average(int n1, int n2);
+double average(double n1, double n2);
+d.mangle("I'm glad to meet you")根据是将值赋给char变量还是char*变量，分别返回字符1和指向字符串“I'm mad to gleet you”的指针。
+不能使用默认参数和函数重载。
+7.编写返回两个参数中较大值的函数模板。
+template <class T>
+T max(T t1, T t2)
+{
+	return t1 > t2 ? t1 : t2;
+}
+8.给定题七的模板和题四的box结构，提供一个模板具体化，它接受两个box参数，并返回体积较大的一个。
+template <>box max(box b1, box b2)
+{
+	return b1.volume > b2,volume ? b1 : b2;
+}
+9.在下述代码(假定这些代码是一个完整程序的一部分)中，v1,v2,v3,v4和v5分别是那种类型？
+int g(int x);
+float m = 5.5f;
+float & rm = m;
+decltype(m) v1 = m;   --> float
+decltype(rm) v2 = m;  --> float &
+decltype((m)) v3 = m; --> float &
+decltype(g(100)) v4;  --> int
+decltype(2.0*m) v5;   --> double
+
