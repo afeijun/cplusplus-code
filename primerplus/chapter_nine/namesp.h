@@ -2,13 +2,13 @@
 // create the pers and debts namespaces
 namespace pers
 {
-	struct Person;
+	struct Person
 	{
 		std::string fname;
 		std::string lname;
 	};
 	void getPerson(Person &);
-	void getPerson(const Person &);
+	void showPerson(const Person &);
 }
 namespace debts
 {
